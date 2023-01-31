@@ -1,10 +1,11 @@
-const Board = require("./board");
-const MoveError = require("./moveError");
+import Board from './board';
+import MoveError from './moveError';
 
 class Game {
   constructor() {
     this.board = new Board();
-    this.currentPlayer = Board.marks[0];
+    this.currentPlayer = Board.MARKS[0];
+    // this.mark = this.currentPlayer.bind(this)
   }
 
   isOver() {
@@ -22,9 +23,9 @@ class Game {
     this.board.print();
     console.log(`Current Turn: ${this.currentPlayer}`);
 
-    reader.question('Enter rowIdx: ', rowIdxStr => {
+    reader.question('Enter rowIdx: ', (rowIdxStr) => {
       const rowIdx = parseInt(rowIdxStr);
-      reader.question('Enter colIdx: ', colIdxStr => {
+      reader.question('Enter colIdx: ', (colIdxStr) => {
         const colIdx = parseInt(colIdxStr);
         callback([rowIdx, colIdx]);
       });
@@ -32,7 +33,7 @@ class Game {
   }
 
   run(reader, gameCompletionCallback) {
-    this.promptMove(reader, move => {
+    this.promptMove(reader, (move) => {
       try {
         this.playMove(move);
       } catch (e) {
@@ -59,10 +60,10 @@ class Game {
   }
 
   swapTurn() {
-    if (this.currentPlayer === Board.marks[0]) {
-      this.currentPlayer = Board.marks[1];
+    if (this.currentPlayer === Board.MARKS[0]) {
+      this.currentPlayer = Board.MARKS[1];
     } else {
-      this.currentPlayer = Board.marks[0];
+      this.currentPlayer = Board.MARKS[0];
     }
   }
 
@@ -71,4 +72,4 @@ class Game {
   }
 }
 
-module.exports = Game;
+export default Game;
