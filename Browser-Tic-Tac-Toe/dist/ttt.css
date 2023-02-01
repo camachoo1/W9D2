@@ -52,7 +52,7 @@ h1 {
   line-height: 80px;
 }
 
-.winner-x, .winner-y hidden {
+.winner-x, .winner-o {
   background: green;
   color: white
 }

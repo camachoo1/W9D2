@@ -44,10 +44,23 @@ class View {
     square.target.textContent = this.game.currentPlayer;
     square.target.classList.add(`${this.game.currentPlayer}`);
 
-    if (this.game.isOver()) {
-      this.game.currentPlayer.classList.toggle(
-        `winner-${this.game.currentPlayer}`
+    if (this.game.winner()) {
+      let tiles = document.querySelectorAll(
+        `.${this.game.currentPlayer}`
       );
+      // console.log(tiles);
+      tiles.forEach((tile) => {
+        tile.classList.add(`winner-${this.game.currentPlayer}`);
+      });
+      let winnerMessage = document.querySelector('.winner');
+      winnerMessage.textContent = `${this.game.currentPlayer.toUpperCase()} wins`;
+      this.el.removeEventListener('click', this.handleClick);
+      // let allTiles = document.getElementsByClassName('.tile');
+      // allTiles.classList.remove('.tile:hover');
+      console.log(this.el);
+      this.el.addEventListener('mouseover', () => {
+        this.el.style.backgroundColor = 'transparent';
+      });
     }
   }
 }
